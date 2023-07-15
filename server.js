@@ -73,7 +73,15 @@ app.get('/api', (req, res) => {
     });
 });
 
-const port = 3000;
+/*const port = 3000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
+});*/
+
+const PORT = process.env.PORT || 3030;
+
+// your code
+
+app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`);
 });
