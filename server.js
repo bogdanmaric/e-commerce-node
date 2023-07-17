@@ -3,10 +3,13 @@ const axios = require('axios');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
-});
+app.use(express.static('public')); // Serve static files from the 'public' folder
 
+app.set('view engine', 'ejs'); // View engine EJS
+
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
 app.get('/api', (req, res) => {
   const requestData = {
@@ -61,7 +64,7 @@ app.get('/api', (req, res) => {
 
   axios.post('https://entegrasyon.asseco-see.com.tr/msu/api/v2', requestData, {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
   })
     .then(response => {
@@ -73,14 +76,7 @@ app.get('/api', (req, res) => {
     });
 });
 
-/*const port = 3000;
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});*/
-
 const PORT = process.env.PORT || 3030;
-
-// your code
 
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
