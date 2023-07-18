@@ -1,64 +1,56 @@
 const axios = require('axios');
 
+function generateRandomString(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomString = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  return randomString;
+}
+
 const apiSessionTokenRequest = async () => {
-    const requestData = {
+
+  try {
+    const data = {
         ACTION: "SESSIONTOKEN",
         MERCHANTUSER: "api.test@payten.com",
         MERCHANTPASSWORD: "Hephr=R4SKNycaLf",
         MERCHANT: "chipcardtest01",
         CUSTOMER: "Customer-UCUoumJV",
         SESSIONTYPE: "PAYMENTSESSION",
-        MERCHANTPAYMENTID: "Payment-UCUoumJV",
-        AMOUNT: 10.00,
-        CURRENCY: "TRY",
+        MERCHANTPAYMENTID: "Payment-" + generateRandomString(40),
+        AMOUNT: 2598.00,
+        CURRENCY: "USD",
         CUSTOMEREMAIL: "customerEmail-UCUoumJV",
         CUSTOMERNAME: "CustomerNameUCUoumJV",
         CUSTOMERPHONE: 11111111111111,
-        RETURNURL: "http://merchantReturnUrl",
+        RETURNURL: "http://localhost:3030/success",
         SESSIONTYPE: "PAYMENTSESSION",
         ORDERITEMS: [
           {
-          "code": "T00D3AITCC",
-          "name": "Galaxy Note 3",
-          "description": "Description of Galaxy Note 3",
-          "quantity": 2,
-          "amount": 449.99
-          },
-          {
-          "code": "B00D9AVYBM",
-          "name": "Samsung Galaxy S III",
-          "description": "Samsung Galaxy S III (S3) Triband White (Boost Mobile)",
+          "code": "C01E3AITIC",
+          "name": "Sony A7 IV",
+          "description": "Camera",
           "quantity": 1,
-          "amount": 149.95
-          },
-          {
-          "code": "B00NQGP5M8",
-          "name": "Apple iPhone 6",
-          "description": "Apple iPhone 6, Gold, 64 GB (Unlocked) by Apple",
-          "quantity": 1,
-          "amount": 139.95
-          },
-          {
-          "code": "B00U8KSUIG",
-          "name": "Samsung Galaxy S6",
-          
-          "description": "Samsung Galaxy S6 SM-G920F 32GB (FACTORY UNLOCKED) 5.1 QHDBlack-InternationalVersion",
-          
-          "quantity": 1,
-          "amount": 129.95
+          "amount": 2598.00
           }
         ]
       };
 
-      try {
-        const response = await axios.post('https://entegrasyon.asseco-see.com.tr/msu/api/v2', requestData, {
-            headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        });
-        return response;
+      const header = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+          }
+      };
+
+      const response = await axios.post('https://entegrasyon.asseco-see.com.tr/msu/api/v2', data, header);
+        return response.data;
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error:', error);
         throw error;
       }
 };
@@ -66,18 +58,3 @@ const apiSessionTokenRequest = async () => {
 module.exports = {
     apiSessionTokenRequest
 };
-
-/*
-      const response = axios.post('https://entegrasyon.asseco-see.com.tr/msu/api/v2', requestData, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-        .then(response => {
-          res.json(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-          res.status(500).json({ error: 'Error occurred' });
-        });
-*/
