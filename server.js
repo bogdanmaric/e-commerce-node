@@ -1,26 +1,25 @@
 const express = require('express');
 const axios = require('axios');
 const api = require("./api");
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(express.static('public')); // Serve static files from the 'public' folder
-app.set('view engine', 'ejs'); // View engine EJS
+app.use(express.urlencoded({ extended: false }));
 
-let token = "";
+app.set('view engine', 'ejs'); // View engine EJS
 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-
+let token = "";
 app.get('/payment', async (req, res) => {
   try {
     const responseData = await api.apiSessionTokenRequest();
     token = responseData["sessionToken"];
     const url = "https://entegrasyon.asseco-see.com.tr/chipcard/pay3d/" + token;
-    console.log(token);
-
     res.redirect(url);
   } catch (error) {
     res.status(500).json({ error: 'Error with API call' })
@@ -28,9 +27,8 @@ app.get('/payment', async (req, res) => {
 });
 
 app.post('/success', async (req, res) => {
-  //console.log("request", await api.apiTransactionStatusCheck(token));
-  //console.log("reqBody " + req.getParameter('apiMerchantId'));
-  res.render('index');
+  const formData = req.body;
+  res.render('index', { data: formData});
 });
 
 const PORT = process.env.PORT || 3030;

@@ -13,22 +13,22 @@ function generateRandomString(length) {
 }
 
 const apiSessionTokenRequest = async () => {
-
+  const merchantID = "Payment-" + generateRandomString(40);
   try {
     const data = {
         ACTION: "SESSIONTOKEN",
         MERCHANTUSER: "api.test@payten.com",
         MERCHANTPASSWORD: "Hephr=R4SKNycaLf",
         MERCHANT: "chipcardtest01",
-        CUSTOMER: "Customer-UCUoumJV",
+        CUSTOMER: "Ivko Ivić",
         SESSIONTYPE: "PAYMENTSESSION",
-        MERCHANTPAYMENTID: "Payment-" + generateRandomString(40),
+        MERCHANTPAYMENTID: `${merchantID}`,
         AMOUNT: 2598.00,
         CURRENCY: "USD",
         CUSTOMEREMAIL: "customerEmail-UCUoumJV",
         CUSTOMERNAME: "CustomerNameUCUoumJV",
         CUSTOMERPHONE: 11111111111111,
-        RETURNURL: "http://localhost:3030/success",
+        RETURNURL: "http://localhost:3030/success#result",
         SESSIONTYPE: "PAYMENTSESSION",
         ORDERITEMS: [
           {

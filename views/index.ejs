@@ -12,32 +12,6 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 
-	<style>
-
-		.product {
-			display: flex;
-			align-items: center;
-			width: fit-content;
-			padding: 5px;
-		}
-
-		.price {
-			font-size: 1.3em;
-			margin-right: 10px;
-		}
-
-		.product button {
-			background-color: blue;
-			color: white;
-			padding: 8px 12px;
-			border: none;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-		}
-
-	</style>
-
 	<body>
 
 		<!-- Header -->
@@ -91,8 +65,32 @@
 								</div>
 						</div>
 					</section>
-				</div>
 
+					<% if (typeof data !== 'undefined') { %>
+					<!-- Section -->
+					<section class="wrapper style2" id="result">
+						<div class="inner">
+							<div class="container">
+								<h2>Result</h2>
+								<ul style="list-style: none;">
+									<li><strong>ReturnURL: </strong><%= data.returnUrl %></li>
+									<li><strong>MerchantPaymentID: </strong><%= data.merchantPaymentId %></li>
+									<li><strong>CustomerID: </strong><%= data.customerId %></li>
+									<li><strong>PanLast4: </strong><%= data.panLast4 %></li>
+									<li><strong>CardBin: </strong><%= data.cardBin %></li>
+									<li><strong>Amount: </strong><%= data.amount %>.00 $</li>
+									<li><strong>Installment: </strong><%= data.installment %></li>
+									<li><strong>SessionToken: </strong><%= data.sessionToken %></li>
+									<li><strong>Merchant: </strong><%= data.merchant %></li>
+									<li><strong>TransactionType: </strong><%= data.transactionType %></li>
+									<li><strong>OrderItems: </strong><%= data.orderItems %></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<% } %>
+
+				</div>
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="copyright">
