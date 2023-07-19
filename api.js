@@ -28,7 +28,7 @@ const apiSessionTokenRequest = async () => {
         CUSTOMEREMAIL: "customerEmail-UCUoumJV",
         CUSTOMERNAME: "CustomerNameUCUoumJV",
         CUSTOMERPHONE: 11111111111111,
-        RETURNURL: "https://e-commerce-jvdw.onrender.com/#result",
+        RETURNURL: "https://e-commerce-jvdw.onrender.com/success/#result",
         SESSIONTYPE: "PAYMENTSESSION",
         ORDERITEMS: [
           {
