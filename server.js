@@ -14,11 +14,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-let token = "";
 app.get('/payment', async (req, res) => {
   try {
     const responseData = await api.apiSessionTokenRequest();
-    token = responseData["sessionToken"];
+    const token = responseData["sessionToken"];
     const url = "https://entegrasyon.asseco-see.com.tr/chipcard/pay3d/" + token;
     res.redirect(url);
   } catch (error) {
