@@ -11,6 +11,11 @@
 
 
 /* New stlye */
+	.section-link {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
 	.product {
 		display: flex;

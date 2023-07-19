@@ -34,7 +34,12 @@
 						<h1>Sony A7 IV</h1>
 						<p>Svaka slika ima priču<br />Ispirčaju svoju priču u najboljem kvalitetu</p>
 					</header>
-					<a href="#main" class="button big scrolly">Saznajte više</a>
+					<div class="section-link">
+						<a href="#main" class="button big scrolly" style="margin-bottom: 7px;">Saznajte više</a>
+						<% if (typeof data !== 'undefined') { %>
+							<a href="#result" class="button big scrolly">Rezultat transakcije</a>
+						<% } %>
+					</div>
 				</div>
 			</section>
 
