@@ -30,6 +30,10 @@ app.post('/success', async (req, res) => {
   res.render('index', { data: formData});
 });
 
+app.get('/success', async (req, res) => {
+  res.redirect("/");
+});
+
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
