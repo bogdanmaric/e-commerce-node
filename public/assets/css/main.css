@@ -3861,10 +3861,6 @@
 				font-size: .85em;
 			}
 
-				#banner br {
-					display: none;
-				}
-
 		}
 
 		@media screen and (max-width: 736px) {
